@@ -1,6 +1,6 @@
 /*
  * ESP32 Starter Template
- * A demo application: LED blinking, WiFi scanning, and serial output
+ * PlatformIO C++ application: LED blinking, WiFi scanning, and serial output
  */
 
 #include <Arduino.h>

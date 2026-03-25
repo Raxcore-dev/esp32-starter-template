@@ -31,7 +31,7 @@ Enhancement suggestions are tracked as GitHub issues. When creating an enhanceme
 ### Pull Requests
 
 * Fill in the required template
-* Follow the coding style (we use the Arduino coding style)
+* Follow standard C++ embedded coding conventions
 * Include comments in your code when necessary
 * Test your changes with multiple ESP32 boards if possible
 * Update the README.md if you're adding new features
@@ -60,7 +60,7 @@ Enhancement suggestions are tracked as GitHub issues. When creating an enhanceme
 
 ## Coding Style
 
-* Use Arduino coding style
+* Use standard C++ embedded coding conventions
 * Use meaningful variable names
 * Add comments for complex logic
 * Keep functions small and focused
