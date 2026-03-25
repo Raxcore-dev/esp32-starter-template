@@ -1,6 +1,6 @@
 /*
  * ESP32 Starter Template
- * A fun demo that does cool stuff: LED blinking, WiFi scanning, and serial output
+ * A demo application: LED blinking, WiFi scanning, and serial output
  */
 
 #include <Arduino.h>
@@ -37,9 +37,9 @@ void setup() {
 
     // Print welcome message
     Serial.println();
-    Serial.println("╔════════════════════════════════════════════╗");
-    Serial.println("║     🚀 ESP32 Starter Template Loaded! 🚀   ║");
-    Serial.println("╚════════════════════════════════════════════╝");
+    Serial.println("+----------------------------------------+");
+    Serial.println("|     ESP32 Starter Template Loaded!     |");
+    Serial.println("+----------------------------------------+");
     Serial.println();
     Serial.printf("ESP32 Chip Revision: %d\n", ESP.getChipRevision());
     Serial.printf("CPU Frequency: %d MHz\n", ESP.getCpuFreqMHz());
@@ -54,22 +54,22 @@ void setup() {
 }
 
 void scanWiFiNetworks() {
-    Serial.println("📡 Scanning for WiFi networks...");
+    Serial.println("Scanning for WiFi networks...");
     Serial.println();
 
     int n = WiFi.scanNetworks();
 
     if (n == 0) {
-        Serial.println("😕 No networks found!");
+        Serial.println("No networks found!");
     } else {
-        Serial.printf("✅ Found %d networks!\n", n);
+        Serial.printf("Found %d networks!\n", n);
         Serial.println();
-        Serial.println("┌────┬─────────────────────┬─────────┬────────┬──────┐");
-        Serial.println("│ #  │ SSID                │ RSSI    │ Chan   │ Sec  │");
-        Serial.println("├────┼─────────────────────┼─────────┼────────┼──────┤");
+        Serial.println("+----+---------------------+---------+--------+------+");
+        Serial.println("| #  | SSID                | RSSI    | Chan   | Sec  |");
+        Serial.println("+----+---------------------+---------+--------+------+");
 
         for (int i = 0; i < n; ++i) {
-            Serial.printf("│ %-2d │ %-19s │ %-7d │ %-6d │ %-4s │\n",
+            Serial.printf("| %-2d | %-19s | %-7d | %-6d | %-4s |\n",
                 i + 1,
                 WiFi.SSID(i).substring(0, 19).c_str(),
                 WiFi.RSSI(i),
@@ -77,7 +77,7 @@ void scanWiFiNetworks() {
                 getEncryptionType(WiFi.encryptionType(i)).c_str()
             );
         }
-        Serial.println("└────┴─────────────────────┴─────────┴────────┴──────┘");
+        Serial.println("+----+---------------------+---------+--------+------+");
     }
 
     Serial.println();
@@ -99,13 +99,13 @@ String getEncryptionType(int type) {
 void printProgressBar(int progress, int total, int width) {
     float percentage = (float)progress / total * 100;
     int filledWidth = (progress * width) / total;
-    
+
     Serial.print("[");
     for (int i = 0; i < width; i++) {
         if (i < filledWidth) {
-            Serial.print("█");
+            Serial.print("#");
         } else {
-            Serial.print("░");
+            Serial.print("-");
         }
     }
     Serial.printf("] %5.1f%%\r", percentage);
@@ -119,9 +119,9 @@ void loop() {
         lastLedToggle = currentMillis;
         ledState = !ledState;
         digitalWrite(LED_BUILTIN, ledState ? HIGH : LOW);
-        
+
         // Visual feedback on serial
-        Serial.print(ledState ? "💡 LED ON " : "🌑 LED OFF");
+        Serial.print(ledState ? "LED ON  " : "LED OFF ");
         Serial.print(" | Free Heap: ");
         Serial.print(ESP.getFreeHeap());
         Serial.print(" bytes | Uptime: ");
@@ -133,10 +133,10 @@ void loop() {
     if (currentMillis - lastWifiScan >= WIFI_SCAN_INTERVAL) {
         lastWifiScan = currentMillis;
         scanWiFiNetworks();
-        
+
         // Show system info
-        Serial.println("📊 System Info:");
-        Serial.printf("   CPU Temp: %.1f°C\n", temperatureRead());
+        Serial.println("System Info:");
+        Serial.printf("   CPU Temp: %.1fC\n", temperatureRead());
         Serial.printf("   Min Free Heap: %d bytes\n", ESP.getMinFreeHeap());
         Serial.println();
     }

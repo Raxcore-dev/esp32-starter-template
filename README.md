@@ -1,6 +1,6 @@
-# 🚀 ESP32 Starter Template
+# ESP32 Starter Template
 
-> **A feature-rich, beginner-friendly ESP32 Arduino template with WiFi scanner, LED blinking, system monitoring, and beautiful serial output.**
+> **A feature-rich, beginner-friendly ESP32 Arduino template with WiFi scanner, LED blinking, system monitoring, and formatted serial output.**
 
 Perfect for IoT enthusiasts, embedded systems learners, and rapid prototyping with ESP32 microcontrollers.
 
@@ -11,21 +11,20 @@ Perfect for IoT enthusiasts, embedded systems learners, and rapid prototyping wi
 ![GitHub stars](https://img.shields.io/github/stars/raxcore-dev/esp32-starter-template?style=for-the-badge)
 ![GitHub forks](https://img.shields.io/github/forks/raxcore-dev/esp32-starter-template?style=for-the-badge)
 
-## ✨ Features
+## Features
 
-This template comes packed with cool features out of the box:
+This template comes packed with useful features out of the box:
 
-- **💡 Built-in LED Blinking** - Visual feedback with the onboard LED
-- **📡 WiFi Scanner** - Scans and displays nearby WiFi networks in a nice table format
-- **📊 System Monitoring** - Real-time display of:
+- **Built-in LED Blinking** - Visual feedback with the onboard LED
+- **WiFi Scanner** - Scans and displays nearby WiFi networks in a formatted table
+- **System Monitoring** - Real-time display of:
   - Free heap memory
   - CPU temperature
-  - Supply voltage
   - Uptime counter
-- **🎨 Fancy Serial Output** - Beautiful formatted console output with ASCII tables and progress bars
-- **⚡ Fast Upload** - Optimized upload speed for quick development cycles
+- **Formatted Serial Output** - Clean console output with ASCII tables
+- **Fast Upload** - Optimized upload speed for quick development cycles
 
-## 📋 Prerequisites
+## Prerequisites
 
 ### Hardware
 - ESP32 Development Board (ESP32 DevKit, NodeMCU-32S, etc.)
@@ -44,7 +43,7 @@ This template comes packed with cool features out of the box:
 pip install platformio
 
 # Or use the VS Code extension (recommended for beginners)
-# Extensions → Search "PlatformIO IDE" → Install
+# Extensions -> Search "PlatformIO IDE" -> Install
 ```
 
 ### USB Permissions (Linux)
@@ -58,7 +57,7 @@ sudo usermod -aG dialout $USER
 # Log out and log back in for changes to take effect
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Connect Your ESP32
 
@@ -97,7 +96,7 @@ pio device monitor --baud 115200
 
 **Pro tip:** Press `Ctrl+T` then `Ctrl+Q` to exit the serial monitor.
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 esp32-starter-template/
@@ -105,10 +104,14 @@ esp32-starter-template/
 │   └── main.cpp          # Main application code
 ├── .gitignore            # Git ignore file
 ├── platformio.ini        # PlatformIO configuration
-└── README.md             # This file
+├── LICENSE               # MIT License
+├── README.md             # This file
+├── CONTRIBUTING.md       # Contribution guidelines
+├── CODE_OF_CONDUCT.md    # Community standards
+└── SECURITY.md           # Security policy
 ```
 
-## 🛠️ Configuration
+## Configuration
 
 ### Change Upload Port
 
@@ -141,7 +144,7 @@ Then upload with:
 pio run -e esp32s3 --target upload
 ```
 
-## 🎯 What the Code Does
+## What the Code Does
 
 ### LED Blinking
 - Toggles the built-in LED every 250ms
@@ -158,12 +161,11 @@ pio run -e esp32s3 --target upload
 
 ### System Info
 - CPU temperature (using internal sensor)
-- Supply voltage
 - Free heap memory
 - Minimum free heap
 - Uptime counter
 
-## 🔧 Troubleshooting
+## Troubleshooting
 
 ### "Permission denied" when uploading
 ```bash
@@ -187,7 +189,7 @@ sudo usermod -aG dialout $USER
 - Try moving closer to your router
 - Check antenna connection (if your board has external antenna)
 
-## 📝 Customization Ideas
+## Customization Ideas
 
 Want to extend this template? Here are some ideas:
 
@@ -199,15 +201,15 @@ Want to extend this template? Here are some ideas:
 - **OLED display** - Add an I2C OLED for visual output
 - **Sensors** - Add temperature, humidity, motion sensors, etc.
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - feel free to use it for your projects!
 
-## 🤝 Contributing
+## Contributing
 
 Found a bug? Have a suggestion? Feel free to open an issue or submit a pull request!
 
-## 📚 Resources
+## Resources
 
 - [ESP32 Datasheet](https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf)
 - [Arduino ESP32 Documentation](https://docs.espressif.com/projects/arduino-esp32/en/latest/)
@@ -216,6 +218,6 @@ Found a bug? Have a suggestion? Feel free to open an issue or submit a pull requ
 
 ---
 
-**Made with ❤️ for the ESP32 community**
+**Made for the ESP32 community**
 
-Happy coding! 🎉
+Happy coding!
