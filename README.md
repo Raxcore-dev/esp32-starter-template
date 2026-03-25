@@ -1,11 +1,15 @@
 # 🚀 ESP32 Starter Template
 
-A fun and feature-rich starter template for ESP32 development using PlatformIO and Arduino framework.
+> **A feature-rich, beginner-friendly ESP32 Arduino template with WiFi scanner, LED blinking, system monitoring, and beautiful serial output.**
 
-![ESP32](https://img.shields.io/badge/Board-ESP32-blue)
-![PlatformIO](https://img.shields.io/badge/Platform-PlatformIO-success)
-![Framework](https://img.shields.io/badge/Framework-Arduino-orange)
-![License](https://img.shields.io/badge/License-MIT-green)
+Perfect for IoT enthusiasts, embedded systems learners, and rapid prototyping with ESP32 microcontrollers.
+
+![ESP32](https://img.shields.io/badge/Board-ESP32-blue?style=for-the-badge)
+![PlatformIO](https://img.shields.io/badge/Platform-PlatformIO-success?style=for-the-badge)
+![Framework](https://img.shields.io/badge/Framework-Arduino-orange?style=for-the-badge)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+![GitHub stars](https://img.shields.io/github/stars/raxcore-dev/esp32-starter-template?style=for-the-badge)
+![GitHub forks](https://img.shields.io/github/forks/raxcore-dev/esp32-starter-template?style=for-the-badge)
 
 ## ✨ Features
 
