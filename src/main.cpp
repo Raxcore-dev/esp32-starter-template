@@ -1,146 +1,33 @@
 /*
- * ESP32 Starter Template
- * PlatformIO C++ application: LED blinking, WiFi scanning, and serial output
+ * Simple LED Blink Example for ESP32
+ * Blinks an LED on and off every 1 second
  */
 
 #include <Arduino.h>
-#include <WiFi.h>
 
-// Declare Serial for ESP32
-extern HardwareSerial Serial;
-
-// Pin definitions
-#define LED_BUILTIN 14  // Most ESP32 boards have LED on GPIO14
-
-// Timing constants
-#define LED_BLINK_INTERVAL 250  // ms
-#define WIFI_SCAN_INTERVAL 5000 // ms
-
-// Global variables
-unsigned long lastLedToggle = 0;
-unsigned long lastWifiScan = 0;
-bool ledState = false;
-
-// Forward declaration
-String getEncryptionType(int type);
-
+// Pin definition - change if needed
+#define LED_PIN 14  // GPIO 4 (or use 2 for built-in LED on some boards)
+#define LED_PIN2 12 // GPIO 5 (or use 2 for built-in LED on some boards)
 void setup() {
-    // Initialize serial communication
-    Serial.begin(115200);
-    while (!Serial) {
-        ; // Wait for serial port to connect
-    }
-
-    // Initialize LED pin
-    pinMode(LED_BUILTIN, OUTPUT);
-    digitalWrite(LED_BUILTIN, HIGH); // Start with LED off (active LOW)
-
-    // Print welcome message
-    Serial.println();
-    Serial.println("+----------------------------------------+");
-    Serial.println("|     ESP32 Starter Template Loaded!     |");
-    Serial.println("+----------------------------------------+");
-    Serial.println();
-    Serial.printf("ESP32 Chip Revision: %d\n", ESP.getChipRevision());
-    Serial.printf("CPU Frequency: %d MHz\n", ESP.getCpuFreqMHz());
-    Serial.printf("Flash Size: %d KB\n", ESP.getFlashChipSize() / 1024);
-    Serial.printf("Free Heap: %d bytes\n", ESP.getFreeHeap());
-    Serial.println();
-    Serial.println("Starting WiFi scan...");
-    Serial.println();
-
-    // Initialize WiFi
-    WiFi.mode(WIFI_MODE_STA);
-}
-
-void scanWiFiNetworks() {
-    Serial.println("Scanning for WiFi networks...");
-    Serial.println();
-
-    int n = WiFi.scanNetworks();
-
-    if (n == 0) {
-        Serial.println("No networks found!");
-    } else {
-        Serial.printf("Found %d networks!\n", n);
-        Serial.println();
-        Serial.println("+----+---------------------+---------+--------+------+");
-        Serial.println("| #  | SSID                | RSSI    | Chan   | Sec  |");
-        Serial.println("+----+---------------------+---------+--------+------+");
-
-        for (int i = 0; i < n; ++i) {
-            Serial.printf("| %-2d | %-19s | %-7d | %-6d | %-4s |\n",
-                i + 1,
-                WiFi.SSID(i).substring(0, 19).c_str(),
-                WiFi.RSSI(i),
-                WiFi.channel(i),
-                getEncryptionType(WiFi.encryptionType(i)).c_str()
-            );
-        }
-        Serial.println("+----+---------------------+---------+--------+------+");
-    }
-
-    Serial.println();
-    WiFi.scanDelete();
-}
-
-String getEncryptionType(int type) {
-    switch (type) {
-        case WIFI_AUTH_OPEN: return "OPEN";
-        case WIFI_AUTH_WEP: return "WEP";
-        case WIFI_AUTH_WPA_PSK: return "WPA";
-        case WIFI_AUTH_WPA2_PSK: return "WPA2";
-        case WIFI_AUTH_WPA_WPA2_PSK: return "WPA/WPA2";
-        case WIFI_AUTH_WPA2_ENTERPRISE: return "WPA2-EAP";
-        default: return "UNK";
-    }
-}
-
-void printProgressBar(int progress, int total, int width) {
-    float percentage = (float)progress / total * 100;
-    int filledWidth = (progress * width) / total;
-
-    Serial.print("[");
-    for (int i = 0; i < width; i++) {
-        if (i < filledWidth) {
-            Serial.print("#");
-        } else {
-            Serial.print("-");
-        }
-    }
-    Serial.printf("] %5.1f%%\r", percentage);
+    // Initialize LED pin as output
+    pinMode(LED_PIN, OUTPUT);
+    pinMode(LED_PIN2, OUTPUT);
 }
 
 void loop() {
-    unsigned long currentMillis = millis();
+    // Turn LED ON
+    digitalWrite(LED_PIN, HIGH);
+    delay(1000);  // Wait 1 second
+    
+    // Turn LED OFF
+    digitalWrite(LED_PIN, LOW);
+    delay(1000);  // Wait 1 second
 
-    // LED Blinking
-    if (currentMillis - lastLedToggle >= LED_BLINK_INTERVAL) {
-        lastLedToggle = currentMillis;
-        ledState = !ledState;
-        digitalWrite(LED_BUILTIN, ledState ? HIGH : LOW);
+    digitalWrite(LED_PIN2, HIGH);
+    delay(1000);  // Wait 1 second
 
-        // Visual feedback on serial
-        Serial.print(ledState ? "LED ON  " : "LED OFF ");
-        Serial.print(" | Free Heap: ");
-        Serial.print(ESP.getFreeHeap());
-        Serial.print(" bytes | Uptime: ");
-        Serial.print(millis() / 1000);
-        Serial.println("s");
-    }
+    // Turn LED OFF
+    digitalWrite(LED_PIN2, LOW);
+    delay(1000);  // Wait 1 second
 
-    // WiFi Scanning
-    if (currentMillis - lastWifiScan >= WIFI_SCAN_INTERVAL) {
-        lastWifiScan = currentMillis;
-        scanWiFiNetworks();
-
-        // Show system info
-        Serial.println("System Info:");
-        Serial.printf("   CPU Temp: %.1fC\n", temperatureRead());
-        Serial.printf("   Min Free Heap: %d bytes\n", ESP.getMinFreeHeap());
-        Serial.println();
-    }
-
-    // Small delay to prevent watchdog trigger
-    delay(1000);
 }
