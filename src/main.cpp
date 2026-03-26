@@ -10,7 +10,7 @@
 extern HardwareSerial Serial;
 
 // Pin definitions
-#define LED_BUILTIN 2  // Most ESP32 boards have LED on GPIO2
+#define LED_BUILTIN 14  // Most ESP32 boards have LED on GPIO14
 
 // Timing constants
 #define LED_BLINK_INTERVAL 250  // ms
@@ -33,7 +33,7 @@ void setup() {
 
     // Initialize LED pin
     pinMode(LED_BUILTIN, OUTPUT);
-    digitalWrite(LED_BUILTIN, LOW);
+    digitalWrite(LED_BUILTIN, HIGH); // Start with LED off (active LOW)
 
     // Print welcome message
     Serial.println();
@@ -142,5 +142,5 @@ void loop() {
     }
 
     // Small delay to prevent watchdog trigger
-    delay(10);
+    delay(1000);
 }
