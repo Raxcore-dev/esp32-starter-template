@@ -1,33 +1,80 @@
 /*
- * Simple LED Blink Example for ESP32
- * Blinks an LED on and off every 1 second
+ * DHT11 Sensor Test for ESP32
+ * Reads temperature and humidity from DHT11 sensor
+ * Displays readings on Serial Monitor
  */
 
 #include <Arduino.h>
+#include <DHT.h>
 
-// Pin definition - change if needed
-#define LED_PIN 14  // GPIO 4 (or use 2 for built-in LED on some boards)
-#define LED_PIN2 12 // GPIO 5 (or use 2 for built-in LED on some boards)
+// DHT11 Sensor Configuration
+#define DHT_PIN 14       // GPIO pin connected to DHT11 data pin
+#define DHT_TYPE DHT11  // DHT sensor type (DHT11 or DHT22)
+
+// Initialize DHT sensor
+DHT dht(DHT_PIN, DHT_TYPE);
+
 void setup() {
-    // Initialize LED pin as output
-    pinMode(LED_PIN, OUTPUT);
-    pinMode(LED_PIN2, OUTPUT);
+    // Initialize serial communication
+    Serial.begin(115200);
+    
+    // Wait for serial monitor to connect
+    while (!Serial) {
+        delay(10);
+    }
+    
+    Serial.println("\n=================================");
+    Serial.println("DHT11 Sensor Test");
+    Serial.println("=================================");
+    
+    // Initialize DHT sensor
+    dht.begin();
+    
+    Serial.println("DHT11 sensor initialized...");
+    Serial.println("Reading temperature and humidity every 2 seconds...");
+    Serial.println("=================================\n");
 }
 
 void loop() {
-    // Turn LED ON
-    digitalWrite(LED_PIN, HIGH);
-    delay(1000);  // Wait 1 second
+    // Wait 2 seconds between measurements (DHT11 is slow)
+    delay(2000);
     
-    // Turn LED OFF
-    digitalWrite(LED_PIN, LOW);
-    delay(1000);  // Wait 1 second
-
-    digitalWrite(LED_PIN2, HIGH);
-    delay(1000);  // Wait 1 second
-
-    // Turn LED OFF
-    digitalWrite(LED_PIN2, LOW);
-    delay(1000);  // Wait 1 second
-
+    // Read humidity
+    float humidity = dht.readHumidity();
+    
+    // Read temperature as Celsius
+    float temperature = dht.readTemperature();
+    
+    // Read temperature as Fahrenheit
+    float temperatureF = dht.readTemperature(true);
+    
+    // Check if any reads failed
+    if (isnan(humidity) || isnan(temperature)) {
+        Serial.println("Failed to read from DHT11 sensor!");
+        Serial.println("Check wiring and connections.");
+        return;
+    }
+    
+    // Calculate heat index (how hot it feels)
+    float heatIndex = dht.computeHeatIndex(temperatureF, humidity);
+    
+    // Display readings
+    Serial.println("--- DHT11 Reading ---");
+    Serial.print("Humidity: ");
+    Serial.print(humidity);
+    Serial.println(" %");
+    
+    Serial.print("Temperature: ");
+    Serial.print(temperature);
+    Serial.println(" °C");
+    
+    Serial.print("Temperature: ");
+    Serial.print(temperatureF);
+    Serial.println(" °F");
+    
+    Serial.print("Heat Index: ");
+    Serial.print(heatIndex);
+    Serial.println(" °F");
+    
+    Serial.println("=====================\n");
 }
